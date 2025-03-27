@@ -50,7 +50,10 @@ class App extends StatelessWidget {
         '/': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),
         '/home': (context) => const HomeScreen(),
-        '/project_details': (context) => const ProjectDetailsScreen(),
+        '/project_details': (context) {
+          final projectId = ModalRoute.of(context)!.settings.arguments as String; // ✅ Pass only projectId
+          return ProjectDetailsScreen(projectId: projectId);
+        },
         '/add_project': (context) => const AddProjectScreen(),
       },
       initialRoute: '/',

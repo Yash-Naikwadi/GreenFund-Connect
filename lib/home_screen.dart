@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'projects_screen.dart';
+import 'projects_screen.dart';  // Ensure this file exists
 import 'my_investments_screen.dart';
 import 'profile_screen.dart';
 import 'add_project_screen.dart';
@@ -14,10 +14,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
   final List<Widget> _screens = [
-    const ProjectsScreen(),
+    ProjectsScreen(), // Ensure this screen is implemented
     const MyInvestmentsScreen(),
-    const ProfileScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -72,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: _screens[_selectedIndex],
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "add_project_fab", // Unique tag for FAB
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: () {
           Navigator.pushNamed(context, '/add_project');
