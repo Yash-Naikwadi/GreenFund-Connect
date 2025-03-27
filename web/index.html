@@ -35,5 +35,33 @@
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  <!-- Razorpay Payment Integration -->
+  <script>
+    // Function to handle payment success and notify Flutter Web
+    window.paymentSuccess = function (response) {
+      console.log("Payment successful!", response);
+      window.dispatchEvent(new CustomEvent("flutter_inappwebview.paymentSuccess", { detail: response }));
+    };
+
+    // Function to open Razorpay checkout
+    function openRazorpayCheckout(amount, successCallback) {
+        var options = {
+            key: "rzp_test_YJpRN2tDnFgOld",
+            amount: amount,
+            currency: "INR",
+            name: "GreenFund Connect",
+            description: "Support Green Initiatives",
+            handler: function (response) {
+                console.log("Payment Success:", response);
+                window.paymentSuccess(response); // Call payment success function
+                successCallback(JSON.stringify(response));  // Send response to Flutter
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+    }
+  </script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>  
 </body>
 </html>
